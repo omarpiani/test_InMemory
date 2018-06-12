@@ -12,7 +12,7 @@
       }
     },
     "cachingProviders": {
-      "default": "inMemoryProvider",
+      "default": "noCachingProvider",
       "inMemoryProvider": {
         "factory": "SharpRepository.Repository.Caching.InMemoryConfigCachingProviderFactory, SharpRepository.Repository"
       },

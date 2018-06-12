@@ -1,4 +1,6 @@
-﻿using SharpRepository.Ioc.Mvc;
+﻿using Microsoft.Extensions.Caching.Memory;
+using SharpRepository.Ioc.Mvc;
+using StructureMap.Pipeline;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +14,8 @@ namespace test_InMemory
 {
 	public class WebApiApplication : System.Web.HttpApplication
 	{
+        public static IMemoryCache MemoryCache;
+
 		protected void Application_Start()
 		{
 			AreaRegistration.RegisterAllAreas();
@@ -20,7 +24,7 @@ namespace test_InMemory
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
 			BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-			MvcDependencyResolver.ForRepositoriesUseSharpRepository("repository.json", "sharpRepository");
+			MvcDependencyResolver.ForRepositoriesUseSharpRepository("repository.json", "sharpRepository", null, Lifecycles.Get<SingletonLifecycle>() );
 		}
 	}
 }
